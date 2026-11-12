@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="ms">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Saya Nak Ikut ❤️</title>
+<style>
+:root{--pink:#ff6f9f;--deep:#e83e78;--cream:#fff7fa}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;display:grid;place-items:center;overflow:hidden;background:radial-gradient(circle at 20% 15%,#ffe0eb,transparent 35%),radial-gradient(circle at 80% 85%,#ffd1e2,transparent 35%),var(--cream);font-family:system-ui,-apple-system,Segoe UI,sans-serif;color:#5b2940}
+.card{width:min(92vw,560px);min-height:430px;padding:48px 24px 36px;text-align:center;background:#ffffffd9;border:1px solid #fff;box-shadow:0 18px 60px #d65a8625;border-radius:30px;position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.heart{font-size:64px;line-height:1;margin-bottom:20px;animation:beat 1.2s infinite}h1{font-size:clamp(2rem,7vw,3.2rem);margin:0 0 14px;color:var(--deep);letter-spacing:-1.5px}p{font-size:1.08rem;margin:0 0 30px;color:#87556a}
+.buttons{display:flex;gap:18px;align-items:center;justify-content:center;min-height:58px;position:relative;width:100%}button{border:0;border-radius:999px;padding:14px 34px;font-size:1.05rem;font-weight:750;cursor:pointer;box-shadow:0 8px 18px #e45b8b30;transition:transform .18s,background .18s}#yes{background:var(--deep);color:white}#yes:hover{background:#cf2d67;transform:translateY(-2px) scale(1.04)}#no{background:#f1e8ec;color:#765967;position:relative;touch-action:none}
+#result{display:none;margin-top:28px;font-size:1.25rem;font-weight:700;color:var(--deep);animation:pop .35s ease}.float{position:fixed;bottom:-40px;opacity:.3;pointer-events:none;animation:rise linear infinite;z-index:0}
+@keyframes beat{0%,100%{transform:scale(1)}50%{transform:scale(1.13)}}@keyframes rise{to{transform:translateY(-115vh) rotate(25deg);opacity:0}}@keyframes pop{from{transform:scale(.7);opacity:0}to{transform:scale(1);opacity:1}}
+@media(max-width:420px){.card{min-height:400px;padding:35px 18px}.buttons{gap:12px}button{padding:13px 27px}}
+</style></head>
+<body>
+<main class="card">
+ <div class="heart">💗</div>
+ <h1>Saya Nak Ikut ❤️</h1>
+ <p>Jadi… jawapan awak? 😊</p>
+ <div class="buttons" id="playArea">
+  <button id="yes">Yes 💖</button>
+  <button id="no">No 🙈</button>
+ </div>
+ <div id="result">Yayyy! Jom kita pergi sama-sama! 🥰💕</div>
+</main>
+<script>
+const no=document.getElementById('no'), yes=document.getElementById('yes'), area=document.getElementById('playArea');
+function dodge(){
+ const a=area.getBoundingClientRect(), b=no.getBoundingClientRect();
+ const maxX=Math.max(0,a.width-b.width), maxY=90;
+ let x=Math.random()*maxX-maxX/2, y=(Math.random()-.5)*maxY;
+ no.style.position='relative'; no.style.left=x+'px'; no.style.top=y+'px';
+}
+no.addEventListener('pointerenter',dodge);no.addEventListener('touchstart',e=>{e.preventDefault();dodge()},{passive:false});no.addEventListener('click',e=>{e.preventDefault();dodge()});
+yes.addEventListener('click',()=>{document.querySelector('p').textContent='';area.style.display='none';document.getElementById('result').style.display='block';document.querySelector('.heart').textContent='💞';});
+for(let i=0;i<18;i++){const s=document.createElement('span');s.className='float';s.textContent=['♡','♥','💕','✿'][i%4];s.style.left=Math.random()*100+'vw';s.style.animationDuration=(8+Math.random()*12)+'s';s.style.animationDelay=(-Math.random()*18)+'s';s.style.fontSize=(18+Math.random()*24)+'px';document.body.appendChild(s)}
+</script></body></html>
